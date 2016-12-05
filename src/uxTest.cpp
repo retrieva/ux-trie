@@ -35,6 +35,23 @@ TEST(ux, trivial){
   ASSERT_EQ(ux::NOTFOUND, ux.prefixSearch(q.c_str(), q.size(), retLen));
 }
 
+TEST(ux, empty_save_load) {
+  ux::Trie ux;
+  vector<string> wordList;
+  ux.build(wordList);
+
+  {
+    std::stringstream ss;
+    ux.save(ss);
+    ss.seekg(0);
+    ux.load(ss);
+  }
+
+  string q = "hoge";
+  size_t retLen = 0;
+  ASSERT_EQ(ux::NOTFOUND, ux.prefixSearch(q.c_str(), q.size(), retLen));
+}
+
 TEST(ux, simple){
   vector<string> wordList;
   wordList.push_back("i");

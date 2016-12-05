@@ -232,7 +232,9 @@ int Trie::load(std::istream& is){
   if (!is){
     return LOAD_ERROR;
   }
-  isReady_ = true;
+  if (keyNum_ > 0){
+    isReady_ = true;
+  }
   return 0;
 }
   
